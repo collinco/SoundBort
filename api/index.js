@@ -4,9 +4,11 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const client = new Discord.Client();
 const express = require('express')
+var cors = require('cors')
 
 const app = express()
 const port = 3000
+app.use(cors())
 
 client.login(process.env.CLIENT_KEY);
 
