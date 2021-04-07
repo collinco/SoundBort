@@ -8,7 +8,9 @@ import reportWebVitals from './reportWebVitals';
 const name = 'Cole Collins';
 // const element = <h1>Hello, {name}</h1>;
 
-class Grid extends React.Component {
+
+
+class Test extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +21,53 @@ class Grid extends React.Component {
     };
 
     // This binding is necessary to make `this` work in the callback
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(name) {
+    console.log("handleClick",name)
+    console.log("http://localhost:3000/play?filename=" + name)
+    fetch("http://localhost:3000/play?filename=" + name)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log("handleClick")
+        console.log(result)
+      },
+      (error) => {
+        this.setState({
+          error
+        });
+      }
+    )
+  }
+  
+  render() {
+    console.log(this.props.items)
+
+    const listItems = this.props.items.map((name,index) =>
+      <div key={name} class="sound" onClick={() => this.handleClick(name)}>
+        <div>🔥</div>
+        <div>{name}</div>
+    </div>
+    );
+    console.log("listItems",listItems)
+
+    return (
+      <div class="grid">{listItems}</div>
+    );
+  }
+}
+
+class Grid extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: new Date(),
+      error: null,
+      isLoaded: false,
+      items: []
+    };
   }
 
   componentDidMount() {
@@ -48,99 +96,27 @@ class Grid extends React.Component {
   componentWillUnmount() {
   }
 
-  handleClick() {
-    console.log("handleClick")
-    fetch("http://localhost:3000/play?filename=Malphite_Select.mp3")
-    .then(res => res.json())
-    .then(
-      (result) => {
-        console.log("handleClick")
-        console.log(result)
-      },
-      (error) => {
-        this.setState({
-          error
-        });
-      }
-    )
-  }
-
   render() {
     return (
       <div>
         <h1>SoundBort</h1>
-        <p>For documentation visit : https://github.com/collinco/SoundBort</p>
         <p>Search : </p>
-        <div class="grid">
-            <div class="sound">
-              <div>Icon</div>
-              <div>Sword Swing #1</div>
-              <div>1.53 sec</div>
-            </div>
-            <div class="sound" onClick={this.handleClick}>
-              <div>Icon #2</div>
-              <div>{this.state.items[1]}</div>
-              <div>1.01 sec</div>
-            </div>
-            <div class="sound">
-              <div>Icon #4</div>
-              <div>Sound 3</div>
-              <div>1314.11 sec</div>
-            </div>
-            <div class="sound">
-              <div>Icon #3</div>
-              <div>Sound 4</div>
-              <div>12.01 sec</div>
-            </div>
-        </div>
-        <div class="grid">
-            <div class="sound">Sound 1</div>
-            <div class="sound">Sound 2</div>
-            <div class="sound">Sound 3</div>
-            <div class="sound">Sound 4</div>
-        </div>
-        <div class="grid">
-            <div class="sound">Sound 1</div>
-            <div class="sound">Sound 2</div>
-            <div class="sound">Sound 3</div>
-            <div class="sound">Sound 4</div>
-        </div>
-        <div class="grid">
-            <div class="sound">Sound 1</div>
-            <div class="sound">Sound 2</div>
-            <div class="sound">Sound 3</div>
-            <div class="sound">Sound 4</div>
-        </div>
-        <div class="grid">
-            <div class="sound">Sound 1</div>
-            <div class="sound">Sound 2</div>
-            <div class="sound">Sound 3</div>
-            <div class="sound">Sound 4</div>
-        </div>
-        <div class="grid">
-            <div class="sound">Sound 1</div>
-            <div class="sound">Sound 2</div>
-            <div class="sound">Sound 3</div>
-            <div class="sound">Sound 4</div>
+        <div class="item-grid">
+          <Test items={this.state.items}/>
         </div>
   
         <p>Create Custom Board</p>
         <p>Import Clip</p>
         <p>Disconnect Bot</p>
         <p>New</p>
-        
+
+        <p>For documentation visit : https://github.com/collinco/SoundBort</p>
       </div>
     );
   }
 }
     
 
-function Test(props) {
-  return (
-    <div>
-    </div>
-  );
-}
 
 ReactDOM.render(
   <React.StrictMode>

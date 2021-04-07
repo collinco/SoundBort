@@ -35,26 +35,25 @@ app.get('/', (req, res) => {
 
 // Play a clip
 app.get('/play', (req, res) => {
-    console.log("/play")
     filename = req.query.filename
     
-    if (!filename) {
-      console.log("no filename provided as query param!")
-      res.json({})
-    }
+    // if (!filename) {
+    //   console.log("no filename provided as query param!")
+    //   res.json({})
+    // }
 
     // TODO : Check if filename exists
 
     const dispatcher = connection.play(filename);
   
-    dispatcher.on('start', () => {
-        console.log('audio is now playing!');
-    });
+    // dispatcher.on('start', () => {
+    //     console.log('audio is now playing!');
+    // });
 
-    dispatcher.on('finish', () => {
-        console.log('audio has finished playing!');
-        res.json({})
-    });
+    // dispatcher.on('finish', () => {
+    //     console.log('audio has finished playing!');
+    //   });
+      res.json({})
 })
 
 // See all clips
