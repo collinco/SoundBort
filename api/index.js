@@ -53,6 +53,7 @@ app.get('/play', (req, res) => {
 
     dispatcher.on('finish', () => {
         console.log('audio has finished playing!');
+        res.json({})
     });
 })
 

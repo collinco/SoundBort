@@ -17,6 +17,9 @@ class Grid extends React.Component {
       isLoaded: false,
       items: []
     };
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -45,6 +48,23 @@ class Grid extends React.Component {
   componentWillUnmount() {
   }
 
+  handleClick() {
+    console.log("handleClick")
+    fetch("http://localhost:3000/play?filename=Malphite_Select.mp3")
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log("handleClick")
+        console.log(result)
+      },
+      (error) => {
+        this.setState({
+          error
+        });
+      }
+    )
+  }
+
   render() {
     return (
       <div>
@@ -57,9 +77,9 @@ class Grid extends React.Component {
               <div>Sword Swing #1</div>
               <div>1.53 sec</div>
             </div>
-            <div class="sound">
+            <div class="sound" onClick={this.handleClick}>
               <div>Icon #2</div>
-              <div>{this.state.items[0]}</div>
+              <div>{this.state.items[1]}</div>
               <div>1.01 sec</div>
             </div>
             <div class="sound">
