@@ -8,8 +8,6 @@ import reportWebVitals from './reportWebVitals';
 const name = 'Cole Collins';
 // const element = <h1>Hello, {name}</h1>;
 
-
-
 class Test extends React.Component {
   constructor(props) {
     super(props);
@@ -105,10 +103,18 @@ class Grid extends React.Component {
           <Test items={this.state.items}/>
         </div>
   
-        <p>Create Custom Board</p>
-        <p>Import Clip</p>
-        <p>Disconnect Bot</p>
-        <p>New</p>
+        <div  class="button-div">
+          <div class="button-1">Create Custom Board</div>
+        </div>
+        <div class="button-div">
+        <div class="button-2">Import Clip</div>
+        </div>
+        <div class="button-div">
+          <div class="button-3">Disconnect Bot</div>
+        </div>
+        <div class="button-div">
+          <div class="button-4">New</div>
+        </div>
 
         <p>For documentation visit : https://github.com/collinco/SoundBort</p>
       </div>

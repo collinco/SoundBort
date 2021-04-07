@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #fcf9ef;
 }
 
 code {
@@ -36,4 +37,49 @@ p {
   border-style: solid;
   padding: 12px;
   margin: 10px;
+}
+
+.button-1 {
+    background: #5c6363;
+    padding: 6px 12px;
+    display: inline-block;
+    color: white;
+    font-weight: 600;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+.button-2 {
+  background: #291511;
+  padding: 6px 12px;
+  display: inline-block;
+  color: white;
+  font-weight: 600;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+
+.button-3 {
+  background: #1b1a21;
+  padding: 6px 12px;
+  display: inline-block;
+  color: white;
+  font-weight: 600;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+
+.button-4 {
+  background: #47261e;
+  padding: 6px 12px;
+  display: inline-block;
+  color: white;
+  font-weight: 600;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+
+
+.button-div {
+  text-align: center;
 }
