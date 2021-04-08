@@ -57,6 +57,7 @@ class Test extends React.Component {
   }
 }
 
+
 class Grid extends React.Component {
   constructor(props) {
     super(props);
@@ -94,29 +95,50 @@ class Grid extends React.Component {
   componentWillUnmount() {
   }
 
+  handleClick(name) {
+    fetch("http://localhost:3000/disconnect")
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log("handleClick")
+        console.log(result)
+      },
+      (error) => {
+        this.setState({
+          error
+        });
+      }
+    )
+  }
+
   render() {
     return (
       <div>
         <h1>SoundBort</h1>
-        <p>Search : </p>
+        {/* <p>Search : </p> */}
         <div class="item-grid">
           <Test items={this.state.items}/>
         </div>
   
-        <div  class="button-div">
+        {/* <div  class="button-div">
           <div class="button-1">Create Custom Board</div>
-        </div>
+        </div> */}
         <div class="button-div">
         <div class="button-2">Import Clip</div>
         </div>
-        <div class="button-div">
+        <div class="button-div" onClick={() => this.handleClick()}>
           <div class="button-3">Disconnect Bot</div>
         </div>
-        <div class="button-div">
+        {/* <div class="button-div">
           <div class="button-4">New</div>
-        </div>
+        </div> */}
 
-        <p>For documentation visit : https://github.com/collinco/SoundBort</p>
+        {/* you are connected */}
+        {/* you are not connected */}
+        {/* your call took # sec */}
+        {/* add playing button when call in process */}
+
+        <p>For documentation visit : <a href="https://github.com/collinco/SoundBort" target="_blank">https://github.com/collinco/SoundBort</a></p>
       </div>
     );
   }

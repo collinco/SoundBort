@@ -58,8 +58,6 @@ app.get('/play', (req, res) => {
 
 // See all clips
 app.get('/clips', (req, res) => {
-  console.log("/clips")
-  
   soundFileList = []
   fs.readdirSync("./").forEach(file => {
     console.log(file);
@@ -71,11 +69,16 @@ app.get('/clips', (req, res) => {
   res.json(soundFileList);
 });
 
+// Leave channel
+app.get('/disconnect', (req, res) => {
+  connection.disconnect()
+
+  res.json({});
+});
+
 // Not in use
 // See all channels available to bot
 app.get('/join', (req, res) => {
-  console.log( client.channels )
-  
   let channel = client.channels.fetch(req.query.id)
     .then(channel => channel.join())
     .catch(console.error);
@@ -83,6 +86,7 @@ app.get('/join', (req, res) => {
   res.json( { channel : ""} );
 });
 
+
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`SoundBort listening at http://localhost:${port}`)
 })
