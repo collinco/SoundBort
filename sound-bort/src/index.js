@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
 
 // JSX
 const name = 'Cole Collins';
@@ -65,7 +66,8 @@ class Grid extends React.Component {
       date: new Date(),
       error: null,
       isLoaded: false,
-      items: []
+      items: [],
+      selectedFiles: null
     };
   }
 
@@ -111,6 +113,28 @@ class Grid extends React.Component {
     )
   }
 
+  onChangeHandler(event) {
+    console.log("onChangeHandler")
+    console.log(event.target.files)
+    console.log(event.target.files)
+    this.setState({
+      selectedFiles: event.target.files,
+      loaded: 0,
+    })
+
+    const data = new FormData()
+    console.log(event.target.files)
+
+    for(var x = 0; x<event.target.files.length; x++) {
+      data.append('file', event.target.files[x])
+  }
+    axios.post("http://localhost:3000/upload", data, { // receive two parameter endpoint url ,form data 
+    })
+    .then(res => { // then print response status
+      console.log(res.statusText)
+    })
+  }
+
   render() {
     return (
       <div>
@@ -124,7 +148,10 @@ class Grid extends React.Component {
           <div class="button-1">Create Custom Board</div>
         </div> */}
         <div class="button-div">
-        <div class="button-2">Import Clip</div>
+        <div class="button-2">
+          Import Clip
+        <input type="file" accept=".mp3" multiple onChange={(evt) => this.onChangeHandler(evt) } ></input>
+        </div>
         </div>
         <div class="button-div" onClick={() => this.handleClick()}>
           <div class="button-3">Disconnect Bot</div>
@@ -144,7 +171,7 @@ class Grid extends React.Component {
   }
 }
     
-
+// Msg if bot is off
 
 ReactDOM.render(
   <React.StrictMode>

@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const client = new Discord.Client();
 const express = require('express')
+const multer = require('multer')
 var cors = require('cors')
 
 const app = express()
@@ -33,10 +34,39 @@ app.get('/', (req, res) => {
   console.log("home page")
 })
 
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+  cb(null, 'audio')
+},
+filename: function (req, file, cb) {
+  cb(null, file.originalname )
+  // cb(null, Date.now() + '-' + file.originalname )
+}
+})
+
+var upload = multer({ storage: storage }).array('file')
+
+
+app.post('/upload', (req, res) => {
+  console.log("upload")
+  console.log(req.body)
+
+  upload(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+        console.log("MulterError" , err)
+        return res.status(500).json(err)
+    } else if (err) {
+        console.log("upload error", err)
+        return res.status(500).json(err)
+    }
+
+  return res.status(200).send(req.file)
+})
+
+})
+
 // Play a clip
 app.get('/play', (req, res) => {
-    filename = req.query.filename
-    
     // if (!filename) {
     //   console.log("no filename provided as query param!")
     //   res.json({})
@@ -44,7 +74,10 @@ app.get('/play', (req, res) => {
 
     // TODO : Check if filename exists
 
-    const dispatcher = connection.play(filename);
+    console.log(req.query.filename)
+    console.log(req.query)
+
+    const dispatcher = connection.play("./audio/" +  req.query.filename + ".mp3");
   
     // dispatcher.on('start', () => {
     //     console.log('audio is now playing!');
@@ -59,10 +92,10 @@ app.get('/play', (req, res) => {
 // See all clips
 app.get('/clips', (req, res) => {
   soundFileList = []
-  fs.readdirSync("./").forEach(file => {
+  fs.readdirSync("./audio/").forEach(file => {
     console.log(file);
     if (file.includes(".mp3")) {
-      soundFileList.push(file)
+      soundFileList.push(file.slice(0,-4))
     }
   });
 
