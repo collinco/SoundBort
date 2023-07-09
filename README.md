@@ -1,4 +1,7 @@
 <!-- PROJECT LOGO -->
+<h1>7/9/2023 UPDATE</h1>
+<p>Tried running this again today but packages were very out of date and needed serious tinkering. Discord actually had the same idea as me and added <a target="_blank" href="https://support.discord.com/hc/en-us/articles/12612888127767-Soundboard-FAQ">their own soundboard<a></a>! I am no longer working on this project.</p>
+
 <br />
 <p align="center">
   <h3 align="center">SoundBort</h3>
@@ -59,14 +62,14 @@ cd SoundBort
 ### Discord bot and server
 1. Create a Discord developer account here [Discord Developer Portal](https://discord.com/developers/applications).
 2. On the same webpage create a new application named whatever you want.
-3. Create a file named `.env` in the "api" directory and add one line with your app's client key (CLIENT_KEY=ABCD1234).
-4. `cd` to the "api" folder and run `npm intall` to get the needed packages.
+3. Create a file named `.env` in the "api" directory and add one line with your app's client key (CLIENT_KEY=7f81x6750ebdfb6325yyy65acd1fa989120c44cbd4922774ec05f34f259c69b).
+4. `cd` to the "api" folder and run `npm install` to get the needed packages.
 5. Run the server with `node index.js`. You should see the server start on http://localhost:3000.
 6. Invite the newly created bot to a Guild by following the "Inviting Your Bot" Instruction [here](https://discordpy.readthedocs.io/en/stable/discord.html). You will only need the 'Connect' and 'Speak voice scopes. 
 7. Invite the bot to a channel by typing "!SoundBort" in a text channel from the desired voice channel
 
 ### Web interface
-1. `cd` to the "sound-bort" folder and run `npm intall` to get the needed packages.
+1. `cd` to the "sound-bort" folder and run `npm install` to get the needed packages.
 2. Run the server with `npm start`. Agree to start on a different port if necessary. React will automatically build and open the webpage.
 
 <!-- //TODO -->
